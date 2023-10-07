@@ -1,12 +1,11 @@
 import pytest
-from selenium import webdriver
 
-URL = 'https://www.saucedemo.com/'
+from pages.LoginPage import LoginPage
 
 
 @pytest.fixture
 def open_browser():
-    driver = webdriver.Chrome()
-    driver.get(URL)
-    yield driver
-    driver.quit()
+    login_p = LoginPage()
+    login_p.open_page()
+    yield login_p
+    login_p.close()
