@@ -22,6 +22,11 @@ class LoginPage:
         error_message = self.driver.find_element(By.CLASS_NAME, 'error-message-container').text
         return error_message == 'Epic sadface: Username is required'
 
+    def enter_login(self, user_name='standard_user', password='secret_sauce'):
+        self.driver.find_element(By.ID, 'user-name').send_keys(user_name)
+        self.driver.find_element(By.CSS_SELECTOR, '[data-test="password"]').send_keys(password)
+        self.click_login_btn()
+
     def close(self):
         self.driver.quit()
 
