@@ -1,13 +1,15 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+from pages.PageObject import PageObject
 
-class LoginPage:
+
+class LoginPage(PageObject):
 
     url = 'https://www.saucedemo.com/'
 
     def __init__(self):
-        self.driver = webdriver.Chrome()
+        super(LoginPage, self).__init__()
 
     def open_page(self):
         self.driver.get(self.url)
@@ -15,8 +17,8 @@ class LoginPage:
     def click_login_btn(self):
         self.driver.find_element(By.ID, 'login-button').click()
 
-    def is_url(self):
-        return self.driver.current_url == self.url
+    def is_url_login(self):
+        return self.is_url(self.url)
 
     def has_login_error_message(self):
         error_message = self.driver.find_element(By.CLASS_NAME, 'error-message-container').text
@@ -26,7 +28,4 @@ class LoginPage:
         self.driver.find_element(By.ID, 'user-name').send_keys(user_name)
         self.driver.find_element(By.CSS_SELECTOR, '[data-test="password"]').send_keys(password)
         self.click_login_btn()
-
-    def close(self):
-        self.driver.quit()
 
