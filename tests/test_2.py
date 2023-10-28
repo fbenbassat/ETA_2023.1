@@ -5,8 +5,9 @@ from pages.ProductsPage import ProductsPage
 
 class Test2:
 
-    def test_login_saucedemo(self, open_browser):
-        login_p = open_browser
+    @pytest.mark.parametrize('all_browsers', ['safari', 'firefox'])
+    def test_login_saucedemo(self, run_all_browser):
+        login_p = run_all_browser
         login_p.enter_login()
         products_p = ProductsPage(driver=login_p.driver)
         assert products_p.is_url_products(), 'URL da página de produtos inválida!'
