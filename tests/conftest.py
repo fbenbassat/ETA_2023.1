@@ -10,8 +10,11 @@ def open_browser():
     yield login_p
     login_p.close()
 
+
 @pytest.fixture()
 def login_saucedemo(open_browser):
-    driver = open_browser
+    login_p = open_browser
+    login_p.enter_login()
+    yield login_p
 
 
